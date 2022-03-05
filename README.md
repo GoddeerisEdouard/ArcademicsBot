@@ -9,6 +9,11 @@ pip install -r requirements.txt
 python main.py
 ```
 # What you can expect
-You **don't have to click anything**, the game will play itself
-once the race is done, you can exit google chrome and rerun for another race
+When the python program is launched, a new google chrome window will open and  
+the user will be prompted with a menu in his terminal.
+
+### current options
+- AFK autoplay from Multiplayer Lobby
+- Autoplay when game is joined or hosted
+- Let the bot take over when ENTER is pressed
 

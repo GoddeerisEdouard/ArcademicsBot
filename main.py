@@ -34,15 +34,10 @@ def start_webdriver() -> webdriver:
     return driver
 
 
-def start_up_game(driver: webdriver, game_iframe_css_selector: str, button_css_selectors: List[str]) -> None:
+def start_up_game(driver: webdriver, game_iframe_css_selector: str) -> None:
     driver.get("https://www.arcademics.com/games/grand-prix")
     WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it(
         (By.CSS_SELECTOR, game_iframe_css_selector)))
-    # click through all btns to start a game
-    for btn_css_selector in button_css_selectors:
-        btn = WebDriverWait(driver, 20).until(EC.element_to_be_clickable(
-            (By.CSS_SELECTOR, btn_css_selector)))
-        btn.click()
 
 
 def calculate_answers(driver: webdriver, questionbox_css_selector: str, answer_boxes_css_selectors: List[str]) -> None:
@@ -70,9 +65,49 @@ def calculate_answers(driver: webdriver, questionbox_css_selector: str, answer_b
                 break
 
 
+def complete_autoplay(driver: webdriver, button_css_selectors: List[str]):
+    # click through all btns to start a game
+    for btn_css_selector in button_css_selectors:
+        btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, btn_css_selector)))
+        btn.click()
+
+
+def play_custom_game(driver: webdriver, start_btn_css_selector: str):
+    print("Waiting for you to be in host a custom game...")
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, start_btn_css_selector)))
+    print("Start btn located!")
+    WebDriverWait(driver, 10).until_not(EC.visibility_of_element_located((By.CSS_SELECTOR, start_btn_css_selector)))
+    print("We expect the race will be starting soon!")
+
+def play_on_command():
+    input("Press ENTER to start the bot while in a game!")
+
+def race_menu(driver: webdriver, css_selectors: dict):
+    print("Let's start a race!")
+
+    choice = None
+
+    while choice not in ["1", "2", "3"]:
+        print(
+            "What would you like?\n1. Autoplay from Multiplayer Lobby\n2. Play custom game\n3.Start when I press Enter")
+        choice = input("Choice: ")
+
+        if choice == "1":
+            complete_autoplay(driver, css_selectors["buttons"].values())
+            calculate_answers(driver, css_selectors['boxes']["question"], css_selectors['boxes']['answers'].values())
+        elif choice == "2":
+            play_custom_game(driver, css_selectors["buttons"]["start_btn"])
+            calculate_answers(driver, css_selectors['boxes']["question"], css_selectors['boxes']['answers'].values())
+        elif choice == "3":
+            play_on_command()
+            calculate_answers(driver, css_selectors['boxes']["question"], css_selectors['boxes']['answers'].values())
+        else:
+            print("You didn't choose a valid option, let's try again!")
+
+
 if __name__ == '__main__':
     css_selectors = load_game_data_selectors()
     driver = start_webdriver()
-    print("Let's RACE BABY!")
-    start_up_game(driver, css_selectors['iframe_game'], css_selectors['buttons'].values())
-    calculate_answers(driver, css_selectors['boxes']["question"], css_selectors['boxes']['answers'].values())
+    start_up_game(driver, css_selectors['iframe_game'])
+    race_menu(driver, css_selectors)

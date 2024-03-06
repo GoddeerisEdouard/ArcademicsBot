@@ -14,9 +14,9 @@ from selenium.webdriver.support import expected_conditions as EC
 def start_webdriver() -> webdriver:
     options = webdriver.ChromeOptions()
     options.add_argument("start-maximized")
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option("excludeSwitches", ["enable-automation", "enable-logging"])
     options.add_experimental_option('useAutomationExtension', False)
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager(log_level=0).install()), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     # we need to act as if we're not a bot, else Cloudflare will not load the game
     stealth(driver,
             languages=["en-US", "en"],
@@ -82,7 +82,7 @@ class GameBot:
     def _wait_for_game_lobby(self):
         print("Waiting for you to be in a game lobby...")
         try:
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, self.game_buttons_css_selectors["start_btn"])))
         except TimeoutException:
             raise TimeoutException("You weren't in a game lobby within 30 seconds!")
@@ -134,5 +134,7 @@ def create_gamebot_instance():
 
 
 if __name__ == '__main__':
+    print("Welcome to the Arcademics bot!\nLoading up the bot...")
     bot = create_gamebot_instance()
+    print("Loading up the webpage...")
     bot.open_menu()

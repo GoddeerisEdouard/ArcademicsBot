@@ -12,7 +12,7 @@ python main.py
 # What you can expect
 When the python program is launched, a new google chrome window will open and  
 the user will be prompted with a menu in his terminal.  
-![menu](images/menu example.png)
+![menu](images/menu%20example.png)
 ### current options
 - AFK autoplay from Multiplayer Lobby
 - Autoplay when game is joined or hosted

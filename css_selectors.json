@@ -1,19 +1,19 @@
 {
-   "iframe_game":"#gameContainer > iframe",
-   "buttons":{
-      "play_btn":"#main > g > g",
-      "next_btn":"#main > g > g > g",
-      "play_now_btn":"#main > g > g > g:nth-child(2)",
-      "start_btn":"#main > g > g:nth-child(6)"
-   },
-   "boxes":{
-      "question":"#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)",
-      "question_number": "#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(3)",
-      "answers":{
-         "first_box":"#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(2) > text:nth-child(3)",
-         "second_box":"#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(3) > text:nth-child(3)",
-         "third_box":"#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(4) > text:nth-child(3)",
-         "last_box":"#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(5) > text:nth-child(3)"
-      }
-   }
+  "iframe_game": "#gameContainer > iframe",
+  "buttons": {
+    "play_btn": "#main > g > g",
+    "next_btn": "#main > g > g > g",
+    "play_now_btn": "#main > g > g > g:nth-child(2)",
+    "start_btn": "#main > g > g:nth-child(6)"
+  },
+  "boxes": {
+    "question": "#main > g:nth-child(1) > g:nth-child(2) > g:nth-child(3) > g:nth-child(5) > g:nth-child(1) > text:nth-child(4)",
+    "question_number": "#main > g:nth-child(1) > g:nth-child(2) > g:nth-child(3) > g:nth-child(5) > g:nth-child(1) > text:nth-child(3)",
+    "answers": {
+      "first_box": "#main > g:nth-child(1) > g:nth-child(2) > g:nth-child(3) > g:nth-child(5) > g:nth-child(2) > text:nth-child(3)",
+      "second_box": "#main > g:nth-child(1) > g:nth-child(2) > g:nth-child(3) > g:nth-child(5) > g:nth-child(3) > text:nth-child(3)",
+      "third_box": "#main > g:nth-child(1) > g:nth-child(2) > g:nth-child(3) > g:nth-child(5) > g:nth-child(4) > text:nth-child(3)",
+      "last_box": "#main > g:nth-child(1) > g:nth-child(2) > g:nth-child(3) > g:nth-child(5) > g:nth-child(5) > text:nth-child(3)"
+    }
+  }
 }
